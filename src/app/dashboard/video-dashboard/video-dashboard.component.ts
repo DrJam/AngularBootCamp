@@ -22,8 +22,10 @@ export class VideoDashboardComponent implements OnInit {
     // initialise thumbnails
     this.videoData.forEach(video => {
       video.thumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
-      const embedUrl = `https://www.youtube.com/embed/${video.id}`;
-      video.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+      video.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.id}`);
     });
+
+    // select first video
+    this.selectedVideo = this.videoData.find(() => true);
   }
 }

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col s12 m6 l3">
-    <app-video-list [videoData]="videoData" (videoSelected)="videoSelected($event)"></app-video-list>
+    <app-video-list [videoData]="videoData" [selectedVideo]="selectedVideo" (videoSelected)="videoSelected($event)">
+    </app-video-list>
   </div>
   <div class="col s12 m6 l6">
     <div class="row">
