@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Video } from 'src/types';
 import { videos } from 'src/app/app.constants';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-dashboard',
@@ -15,7 +16,14 @@ export class VideoDashboardComponent implements OnInit {
     this.selectedVideo = video;
   }
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // initialise thumbnails
+    this.videoData.forEach(video => {
+      video.thumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+      const embedUrl = `https://www.youtube.com/embed/${video.id}`;
+      video.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    });
+  }
 }

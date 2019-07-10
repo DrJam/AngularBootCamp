@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Video } from 'src/types';
 
 @Component({
@@ -18,16 +17,9 @@ export class VideoListComponent implements OnInit {
     this.videoSelected.emit(video);
   }
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor() { }
 
   ngOnInit() {
-    // initialise thumbnails
-    this.videoData.forEach(video => {
-      video.thumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
-      const embedUrl = `https://www.youtube.com/embed/${video.id}`;
-      video.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
-    });
-
     // select first video
     this.selectVideo(this.videoData.find(() => true));
   }
