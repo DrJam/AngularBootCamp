@@ -11,7 +11,12 @@ const dashboardRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [VideoDashboardComponent, VideoListComponent, VideoPlayerComponent, StatFiltersComponent],
+  declarations: [
+    VideoDashboardComponent,
+    VideoListComponent,
+    VideoPlayerComponent,
+    StatFiltersComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes)
