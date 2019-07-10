@@ -1,1 +1,9 @@
-<p>video-list works!</p>
+<div *ngFor="let video of videos;" class="row video-row">
+  <div class="video-box">
+    <img [src]="getVideoThumbnailUrl(video)" alt="video.title" class="video-preview">
+    <div>
+      <div class="video-title">{{video.title}}</div>
+      {{video.author}}
+    </div>
+  </div>
+</div>
