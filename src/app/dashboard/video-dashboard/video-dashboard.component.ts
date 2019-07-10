@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Video } from 'src/types';
-import { videos } from 'src/app/app.constants';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-video-dashboard',
@@ -10,22 +10,30 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class VideoDashboardComponent implements OnInit {
   selectedVideo: Video;
-  videoData: Array<Video> = videos;
+  videoData: Array<Video> = [];
 
   videoSelected = (video: Video) => {
     this.selectedVideo = video;
   }
 
-  constructor(private sanitizer: DomSanitizer) { }
-
-  ngOnInit() {
+  initialiseVideos = (videos: Video[]) => {
     // initialise thumbnails
-    this.videoData.forEach(video => {
+    videos.forEach(video => {
       video.thumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
       video.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.id}`);
+      this.videoData.push(video);
     });
 
     // select first video
     this.selectedVideo = this.videoData.find(() => true);
+  }
+
+  constructor(private sanitizer: DomSanitizer, private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.http
+      .get<Video[]>('https://api.angularbootcamp.com/videos')
+      .subscribe(this.initialiseVideos);
   }
 }
