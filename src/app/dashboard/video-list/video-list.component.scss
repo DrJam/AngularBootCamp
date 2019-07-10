@@ -1,21 +1,10 @@
 .video-row {
+  cursor: pointer;
+
   &:hover {
-    background-color: darken(white, 20%);
+    background-color: darken(#fff, 20%);
   }
-
-  .video-box {
-    margin: 0 10px;
-
-    &:nth-child(n + 2) {
-      margin-top: 25px;
-    }
-
-    img.video-preview {
-      width: 100%;
-    }
-
-    .video-title {
-      font-weight: 600;
-    }
+  &.selected {
+    background-color: lighten(#99b2dd, 15%);
   }
 }

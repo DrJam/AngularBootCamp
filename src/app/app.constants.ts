@@ -1,6 +1,6 @@
 import { Video } from 'src/types';
 
-export const videos: Video[] = [
+export const videos: Array<Video> = [
   {
     title: 'Angular Observable Data Flow',
     author: 'Kyle Cordes',

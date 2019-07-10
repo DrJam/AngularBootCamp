@@ -1,0 +1,18 @@
+.video-box {
+  margin: 0 10px;
+
+  &:nth-child(n + 2) {
+    margin-top: 15px;
+  }
+
+  img.video-preview {
+    width: 100%;
+  }
+
+  .video-details {
+    user-select: none;
+    .video-title {
+      font-weight: 600;
+    }
+  }
+}
