@@ -16,12 +16,12 @@ export class VideoDashboardComponent implements OnInit {
     this.selectedVideo = video;
   }
 
-
   constructor(videoDataLoaderService: VideoDataLoaderService) {
     this.videoData = videoDataLoaderService.loadVideoData();
+    // select first video on load
+    this.videoData.subscribe(videos => this.selectedVideo = videos.find(() => true));
   }
 
   ngOnInit() {
-    this.videoData.subscribe(videos => this.selectedVideo = videos.find(() => true));
   }
 }

@@ -9,12 +9,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class VideoDataLoaderService {
-
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
-
-  private initialiseVideos(videos: Video[]): Video[] {
-    // initialise thumbnails
+  private addVideoUrls(videos: Video[]): Video[] {
     return videos.map(video => {
       video.thumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
       video.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.id}`);
@@ -25,6 +22,6 @@ export class VideoDataLoaderService {
   loadVideoData(): Observable<Video[]> {
     return this.http
       .get<Video[]>('https://api.angularbootcamp.com/videos')
-      .pipe(map(videos => this.initialiseVideos(videos)));
+      .pipe(map(videos => this.addVideoUrls(videos)));
   }
 }
