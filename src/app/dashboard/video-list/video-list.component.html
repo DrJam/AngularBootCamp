@@ -1,4 +1,4 @@
-<div class="row video-row" *ngFor="let video of videoData;" [class.selected]="selectedVideo?.id === video?.id"
+<div class="row video-row" *ngFor="let video of videoData | async" [class.selected]="selectedVideo?.id === video?.id"
   (click)="selectVideo(video)">
   <app-video-list-item [video]="video">
   </app-video-list-item>
